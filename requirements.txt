@@ -1,0 +1,5 @@
+-r requirements-fast.txt
+# Retain dependencies used by the original app and existing pages.
+yfinance
+scipy>=1.10.0
+kaleido

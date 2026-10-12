@@ -1,0 +1,13 @@
+# Separate environment from the original app; tested on Python 3.12.
+streamlit>=1.45,<2
+numpy>=2.2,<2.4
+pandas>=2.2,<3
+numba>=0.61,<0.64
+pyarrow>=18,<27
+plotly>=6,<7
+fastapi>=0.115,<1
+uvicorn>=0.30,<1
+pydantic>=2.10,<3
+httpx>=0.28,<1
+matplotlib>=3.9,<4
+reportlab>=4.2,<5

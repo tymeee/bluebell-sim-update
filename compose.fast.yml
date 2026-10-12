@@ -1,0 +1,16 @@
+services:
+  simulation-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.fast
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8000:8000"
+    environment:
+      # Explicit example; size from measured CPU time and concurrent load tests.
+      SIMULATOR_WORKERS: ${SIMULATOR_WORKERS:-4}
+      SIMULATOR_MAX_INFLIGHT: ${SIMULATOR_MAX_INFLIGHT:-64}
+      SIMULATOR_API_KEY: ${SIMULATOR_API_KEY:-}
+      # Requires >= 12 GB RAM (16 GB recommended); shares scenarios across requests.
+      SIMULATOR_SHARED_SCENARIOS: ${SIMULATOR_SHARED_SCENARIOS:-1}
+      SIMULATOR_SCENARIO_SEED: ${SIMULATOR_SCENARIO_SEED:-20261012}

@@ -38,7 +38,7 @@ with st.sidebar.form('simulation_inputs'):
     age = st.number_input('Your age', min_value=0, max_value=84, value=35)
     years = st.number_input('Years until retirement', min_value=0, max_value=84, value=20)
     target = st.number_input('Target wealth at retirement (THB)', min_value=0., max_value=100_000_000., value=5_000_000., step=100_000.)
-    trials = st.slider('Simulations', 100, 1000, 250, 10)
+    trials = st.slider('Simulations', 100, 500, 250, 10)
     inflation = st.slider('Annual inflation', 0., .15, .02, .005)
     st.subheader('Allocations')
     if preset == 'Custom':

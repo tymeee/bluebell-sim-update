@@ -11,8 +11,8 @@ import subprocess
 import tempfile
 
 parser=argparse.ArgumentParser()
-parser.add_argument('--repo',default='tymeee/monte-carlo-retirement-simulation')
-parser.add_argument('--branch',default='performance/fast-simulator-'+datetime.now(timezone.utc).strftime('%Y%m%d-%H%M%S'))
+parser.add_argument('--repo',default='tymeee/bluebell-sim-update')
+parser.add_argument('--branch',default='style/restore-bluebridge-'+datetime.now(timezone.utc).strftime('%Y%m%d-%H%M%S'))
 parser.add_argument('--create-pr',action='store_true')
 args=parser.parse_args()
 root=Path(__file__).resolve().parent
@@ -41,12 +41,12 @@ with tempfile.TemporaryDirectory(prefix='bluebridge-upload-') as temporary:
     changed=subprocess.run(['git','-C',str(checkout),'diff','--cached','--quiet'])
     if changed.returncode==0:
         raise SystemExit('No file changes to upload.')
-    subprocess.run(['git','-C',str(checkout),'commit','-m','Add optimized simulation backend and separate fast interface'],check=True)
+    subprocess.run(['git','-C',str(checkout),'commit','-m','Restore original BlueBridge presentation with optimized computation'],check=True)
     subprocess.run(['git','-C',str(checkout),'push','--set-upstream','origin',args.branch],check=True)
     if args.create_pr:
         body=Path(temporary)/'pr-body.md'
-        body.write_text('Adds a separate Fast_Simulator.py entry point, optimized Python engines, a bounded FastAPI backend, and optional shared daily scenarios for stable portfolio comparisons. PDF generation is on demand. The original app and market data are retained.\n\nValidation: 31 calculation, sampling, concurrency, API, interface, and PDF checks. See BENCHMARK_RESULTS.md for measured 30-user HTTP results and MIGRATION.md for explicit model corrections. Backend hosting and Streamlit secrets must be configured separately.\n')
+        body.write_text('Restores the original BlueBridge hero, logo, theme/CSS, THB inputs, asset selectors, responsive projection, allocation pie, histogram, six-card metric layout, PDF layout, and supporting pages around the existing optimized engine. The current 500-trial frontend cap is retained.\n\nValidation: both model submissions, input callbacks, persistent results, chart generation, separate PDF generation, and the existing calculation/API suite. The annualized metric stays accurately labeled as a per-trial median; simulation engine behavior is unchanged. See RESTORE_STYLE.md.\n')
         subprocess.run(['gh','pr','create','--repo',args.repo,'--head',args.branch,
-            '--title','Add optimized retirement simulator backend and fast interface',
+            '--title','Restore original BlueBridge layout and styling',
             '--body-file',str(body)],cwd=checkout,check=True)
     print(f'Uploaded to https://github.com/{args.repo}/tree/{args.branch}')
